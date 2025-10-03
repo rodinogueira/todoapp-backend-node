@@ -45,12 +45,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "email": { "type": "string", "format": "email" },
-                  "password": { "type": "string", "format": "password" }
-                },
-                "required": ["email", "password"]
+                "$ref": "#/components/schemas/UserLogin"
               }
             }
           }
@@ -83,20 +78,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "title": { "type": "string" },
-                  "description": { "type": "string" },
-                  "status": { "type": "string", "enum": ["pending", "done"] }
-                },
-                "required": ["title", "description"]
+                "$ref": "#/components/schemas/CreateTask"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Tarefa criada"
+            "description": "Tarefa criada",
+              "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Task" }
+              }
+            }
           }
         }
       }
@@ -190,7 +184,36 @@
           "password": { "type": "string", "format": "password", "example": "senha123" }
         },
         "required": ["name", "email", "password"]
-      }
+      },
+      "UserLogin": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email", "example": "joao@email.com" },
+        "password": { "type": "string", "format": "password", "example": "senha123" }
+      },
+      "required": ["email", "password"]
+    },
+    "Task": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "example": "1" },
+        "title": { "type": "string", "example": "Comprar pão" },
+        "description": { "type": "string", "example": "Ir à padaria", "nullable": true },
+        "status": { "type": "string", "enum": ["pending", "done"], "example": "pending" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "status", "createdAt", "updatedAt"]
+    },
+    "CreateTask": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "example": "Comprar pão" },
+        "description": { "type": "string", "example": "Ir à padaria", "nullable": true },
+        "status": { "type": "string", "enum": ["pending", "done"], "example": "pending" }
+      },
+      "required": ["title", "status"]
+    }
     }
   },
   "security": [
