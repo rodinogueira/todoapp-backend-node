@@ -117,7 +117,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Tarefa encontrada"
+            "description": "Tarefa encontrada",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
           },
           "404": {
             "description": "Tarefa não encontrada"
@@ -152,7 +155,10 @@
         },
         "responses": {
           "200": {
-            "description": "Tarefa atualizada"
+              "description": "Tarefa atualizada",
+              "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Task" } }
+            }
           }
         }
       },
