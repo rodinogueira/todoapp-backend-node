@@ -21,13 +21,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": { "type": "string" },
-                  "email": { "type": "string", "format": "email" },
-                  "password": { "type": "string", "format": "password" }
-                },
-                "required": ["name", "email", "password"]
+                "$ref": "#/components/schemas/UserRegister"
               }
             }
           }
@@ -185,6 +179,17 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "UserRegister": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "example": "João" },
+          "email": { "type": "string", "format": "email", "example": "joao@email.com" },
+          "password": { "type": "string", "format": "password", "example": "senha123" }
+        },
+        "required": ["name", "email", "password"]
       }
     }
   },
